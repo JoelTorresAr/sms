@@ -1,0 +1,48 @@
+/* body {
+    font-family: Arial, Helvetica, sans-serif !important;
+} */
+
+.slide-fade-enter {
+    transform: translateX(20px);
+    opacity: 0;
+}
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+    transition: all 0.5s ease;
+}
+
+.slide-fade-leave-to {
+    transform: translateX(-20px);
+    opacity: 0;
+}
+
+.table td, .table th{
+    padding: .55rem  0.75rem;
+}
+
+.el-select{
+    width: 100%;
+}
+
+.el-date-editor.el-input, .el-date-editor.el-input__inner{
+    width: 100% !important;
+}
+
+.swal2-container.swal2-center{
+    z-index: 99999;
+}
+
+.full-width {
+    width:  100% !important;
+}
+
+.image-selected {
+    border-color: green; 
+    background: #00800014;
+}
+
+.btn-actions{
+    display: flex;
+    justify-content: flex-end;
+}

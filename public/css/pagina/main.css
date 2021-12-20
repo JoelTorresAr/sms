@@ -1,0 +1,49 @@
+
+
+
+
+body {
+  background-color: #333;
+  color: #fff;
+}
+
+.navbar {
+ 
+  opacity: .7;
+  font-size: 25px;
+  background: turquoise;
+  color:#fff;
+  text-transform: uppercase;
+  
+ /* border-radius: 20px;*/
+}
+
+#home-section {
+ background: url('./img/tec.jpg') no-repeat;
+  min-height: 150vh;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.dark-overlay {
+ 
+  z-index: 200;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+.home-inner {
+  padding-top: 200px;
+}
+
+@media (max-width: 992px) {
+  .home-inner {
+    padding-top: 150px;
+  }
+
+
+
+}
