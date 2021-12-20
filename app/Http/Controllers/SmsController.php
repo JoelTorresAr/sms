@@ -50,15 +50,16 @@ class SmsController extends Controller
                     //$message_uuid = $test->sendSimpleSMS($record['from'], $value['phone_number'], $body, $nameUser);
                     // $message_uuid = $test->sendWhatsApp($record['from'], $value['phone_number'], $body, $nameUser);
                     $response = $test->sendMessage($value['phone_number'], $body);
-
-                    DB::table('sms')->insertOrIgnore([
-                        'to' => $value['phone_number'],
-                        'body' => $body,
-                        'from' => $record['from'],
-                        'client_id' => $value['id'],
-                        'message_uuid' => $response->idAck,
-                        'status' => $response->status == 200 ? 'Exito' : null,
-                    ]);
+                    $sms = Sms::create(
+                        [
+                            'to' => $value['phone_number'],
+                            'body' => $body,
+                            'from' => $record['from'],
+                            'client_id' => $value['id'],
+                            'message_uuid' => $response->idAck,
+                            'status' => $response->status == 200 ? 'Exito' : null,
+                        ]
+                    );
                 }
             }
             DB::commit();
@@ -73,8 +74,8 @@ class SmsController extends Controller
     {
         //dd($request->all());
         $data = $request->notification;
-        $sms = Sms::where('to', 'like',"%".$data['destination']."%")
-        ->where('message_uuid', 'like',$data['idAck']."%")->first();
+        $sms = Sms::where('to', 'like', "%" . $data['destination'] . "%")
+            ->where('message_uuid', 'like', $data['idAck'] . "%")->first();
         $sms->status =  $data['status'];
         $sms->save();
 

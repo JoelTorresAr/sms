@@ -89,6 +89,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -98,6 +113,43 @@ __webpack_require__.r(__webpack_exports__);
         month: null,
         day: null
       }),
+      months: [{
+        value: 1,
+        text: "Enero"
+      }, {
+        value: 2,
+        text: "Febrero"
+      }, {
+        value: 3,
+        text: "Marzo"
+      }, {
+        value: 4,
+        text: "Abril"
+      }, {
+        value: 5,
+        text: "Mayo"
+      }, {
+        value: 6,
+        text: "Junio"
+      }, {
+        value: 7,
+        text: "Julio"
+      }, {
+        value: 8,
+        text: "Agosto"
+      }, {
+        value: 9,
+        text: "Setiembre"
+      }, {
+        value: 10,
+        text: "Octubre"
+      }, {
+        value: 11,
+        text: "Noviembre"
+      }, {
+        value: 12,
+        text: "Diciembre"
+      }],
       fullscreenLoading: false,
       chartData: {
         type: "line",
@@ -106,7 +158,7 @@ __webpack_require__.r(__webpack_exports__);
           datasets: [{
             // one line graph
             label: "Enviados",
-            data: [0, 0, 1, 2, 67, 62, 27, 14],
+            data: [0, 0, 0, 0, 0, 0, 0, 0],
             backgroundColor: ["rgba(54,73,93,.5)" // Blue
             ],
             borderColor: ["#36495d"],
@@ -114,7 +166,7 @@ __webpack_require__.r(__webpack_exports__);
           }, {
             // another line graph
             label: "No enviados",
-            data: [4.8, 12.1, 12.7, 6.7, 139.8, 116.4, 50.7, 49.2],
+            data: [0, 0, 0, 0, 0, 0, 0, 0],
             backgroundColor: ["rgba(71, 183,132,.5)" // Green
             ],
             borderColor: ["#47b784"],
@@ -124,6 +176,10 @@ __webpack_require__.r(__webpack_exports__);
         options: {
           responsive: true,
           lineTension: 1,
+          interaction: {
+            // Overrides the global setting
+            mode: "index"
+          },
           scales: {
             y: {
               suggestedMin: 50,
@@ -131,19 +187,76 @@ __webpack_require__.r(__webpack_exports__);
             }
           }
         }
-      }
+      },
+      myChart: null
     };
+  },
+  computed: {
+    days: function days() {
+      var days = []; //let year = this.filter.year ? this.filter.year.slice(10,14) : '';
+
+      var year = this.filter.year;
+
+      if (year) {
+        year = String(year).slice(10, 15);
+      }
+
+      var maxDay = new Date(year, this.filter.month, 0).getDate();
+
+      for (var index = 1; index <= maxDay; index++) {
+        days.push(index);
+      }
+
+      return days;
+    }
   },
   watch: {
     "filter.type": {
       handler: function handler(val, oldVal) {
-        this.filter.year = null;
+        if (val == "year") {
+          var months = this.months.map(function (item) {
+            return item.text;
+          });
+          this.chartData.data.labels = months;
+          this.crearGrafico("statisticsId", this.chartData);
+        }
+
+        if (val == "month") {
+          this.chartData.data.labels = this.days;
+          this.crearGrafico("statisticsId", this.chartData);
+        }
+
+        if (val == "day") {
+          var hous = [];
+
+          for (var index = 0; index < 24; index++) {
+            hous.push("".concat(index, ":00"));
+          }
+
+          this.chartData.data.labels = hous;
+          this.crearGrafico("statisticsId", this.chartData);
+        }
+      }
+    },
+    "filter.year": {
+      handler: function handler(val, oldVal) {
         this.filter.month = null;
+      }
+    },
+    "filter.month": {
+      handler: function handler(val, oldVal) {
         this.filter.day = null;
       }
     }
   },
   mounted: function mounted() {
+    if (this.filter.type == "year") {
+      var months = this.months.map(function (item) {
+        return item.text;
+      });
+      this.chartData.data.labels = months;
+    }
+
     this.crearGrafico("statisticsId", this.chartData);
   },
   methods: {
@@ -156,15 +269,28 @@ __webpack_require__.r(__webpack_exports__);
     },
     crearGrafico: function crearGrafico(chartId, chartData) {
       var ctx = document.getElementById(chartId);
-      var myChart = new Chart(ctx, {
+
+      if (this.myChart) {
+        this.myChart.destroy();
+      }
+
+      this.myChart = new Chart(ctx, {
         type: chartData.type,
         data: chartData.data,
         options: chartData.options
       });
     },
     getRecords: function getRecords() {
-      this.filter.post('estadisticas/records').then(function (_ref) {
+      var _this = this;
+
+      this.filter.post("estadisticas/records").then(function (_ref) {
         var data = _ref.data;
+
+        if (data.records.length > 0) {
+          _this.chartData.data.labels.forEach(function (element, key) {
+            if (data.records['']) {}
+          });
+        }
       });
     }
   }
@@ -184,7 +310,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .el-radio-group{\n          display: flex;\n          justify-content: flex-start;\n          align-items: center;\n      } */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .el-radio-group{\n          display: flex;\n          justify-content: flex-start;\n          align-items: center;\n      } */\n", ""]);
 
 // exports
 
@@ -283,14 +409,20 @@ var render = function() {
                   "div",
                   { staticClass: "row text-center" },
                   [
-                    _vm.filter.type === "year"
+                    _vm.filter.type === "year" ||
+                    _vm.filter.type === "month" ||
+                    _vm.filter.type === "day"
                       ? [
                           _c(
                             "div",
                             { staticClass: "col-md-4" },
                             [
                               _c("el-date-picker", {
-                                attrs: { type: "year", placeholder: "Año" },
+                                attrs: {
+                                  type: "year",
+                                  format: "yyyy",
+                                  placeholder: "Año"
+                                },
                                 model: {
                                   value: _vm.filter.year,
                                   callback: function($$v) {
@@ -305,22 +437,35 @@ var render = function() {
                         ]
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.filter.type === "month"
+                    _vm.filter.type === "month" || _vm.filter.type === "day"
                       ? [
                           _c(
                             "div",
                             { staticClass: "col-md-4" },
                             [
-                              _c("el-date-picker", {
-                                attrs: { type: "month", placeholder: "Mes" },
-                                model: {
-                                  value: _vm.filter.month,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.filter, "month", $$v)
-                                  },
-                                  expression: "filter.month"
-                                }
-                              })
+                              _c(
+                                "el-select",
+                                {
+                                  attrs: { placeholder: "Mes" },
+                                  model: {
+                                    value: _vm.filter.month,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.filter, "month", $$v)
+                                    },
+                                    expression: "filter.month"
+                                  }
+                                },
+                                _vm._l(_vm.months, function(month, index) {
+                                  return _c("el-option", {
+                                    key: index,
+                                    attrs: {
+                                      label: month.text,
+                                      value: month.value
+                                    }
+                                  })
+                                }),
+                                1
+                              )
                             ],
                             1
                           )
@@ -333,16 +478,26 @@ var render = function() {
                             "div",
                             { staticClass: "col-md-4" },
                             [
-                              _c("el-date-picker", {
-                                attrs: { type: "date", placeholder: "Dia" },
-                                model: {
-                                  value: _vm.filter.day,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.filter, "day", $$v)
-                                  },
-                                  expression: "filter.day"
-                                }
-                              })
+                              _c(
+                                "el-select",
+                                {
+                                  attrs: { placeholder: "Dia" },
+                                  model: {
+                                    value: _vm.filter.day,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.filter, "day", $$v)
+                                    },
+                                    expression: "filter.day"
+                                  }
+                                },
+                                _vm._l(_vm.days, function(day, index) {
+                                  return _c("el-option", {
+                                    key: index,
+                                    attrs: { label: day, value: day }
+                                  })
+                                }),
+                                1
+                              )
                             ],
                             1
                           )
@@ -369,7 +524,7 @@ var render = function() {
                     staticClass: "btn btn-primary mb-2",
                     on: {
                       "&click": function($event) {
-                        return _vm.getListarClientes($event)
+                        return _vm.getRecords($event)
                       }
                     }
                   },

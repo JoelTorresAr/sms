@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\EstadisticaController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\LandingClientController;
 use App\Http\Controllers\LogController;
@@ -109,7 +110,7 @@ Route::group(['prefix' => 'reports'], function ($router) {
 });
 
 Route::group(['prefix' => 'estadisticas'], function ($router) {
-    Route::get('records', [EstadisticaController::class, 'records']);
+    Route::post('records', [EstadisticaController::class, 'records']);
 });
 
 Route::get('/{optional?}', [WelcomeConttroller::class, 'verifyAction'])->name('basepath')->where('optional', '.*');

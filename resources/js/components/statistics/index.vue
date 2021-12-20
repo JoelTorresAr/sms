@@ -26,34 +26,49 @@
               </div>
               <div class="col-sm-12 text-center">
                 <div class="row text-center">
-                  <template v-if="filter.type === 'year'">
+                  <template
+                    v-if="
+                      filter.type === 'year' ||
+                      filter.type === 'month' ||
+                      filter.type === 'day'
+                    "
+                  >
                     <div class="col-md-4">
                       <el-date-picker
                         v-model="filter.year"
                         type="year"
+                        format="yyyy"
                         placeholder="Año"
                       >
                       </el-date-picker>
                     </div>
                   </template>
-                  <template v-if="filter.type === 'month'">
+                  <template
+                    v-if="filter.type === 'month' || filter.type === 'day'"
+                  >
                     <div class="col-md-4">
-                      <el-date-picker
-                        v-model="filter.month"
-                        type="month"
-                        placeholder="Mes"
-                      >
-                      </el-date-picker>
+                      <el-select v-model="filter.month" placeholder="Mes">
+                        <el-option
+                          v-for="(month, index) in months"
+                          :key="index"
+                          :label="month.text"
+                          :value="month.value"
+                        >
+                        </el-option>
+                      </el-select>
                     </div>
                   </template>
                   <template v-if="filter.type === 'day'">
                     <div class="col-md-4">
-                      <el-date-picker
-                        v-model="filter.day"
-                        type="date"
-                        placeholder="Dia"
-                      >
-                      </el-date-picker>
+                      <el-select v-model="filter.day" placeholder="Dia">
+                        <el-option
+                          v-for="(day, index) in days"
+                          :key="index"
+                          :label="day"
+                          :value="day"
+                        >
+                        </el-option>
+                      </el-select>
                     </div>
                   </template>
                 </div>
@@ -62,7 +77,7 @@
                 <button
                   class="btn btn-primary mb-2"
                   v-loading.fullscreen.lock="fullscreenLoading"
-                  @click.passive="getListarClientes"
+                  @click.passive="getRecords"
                 >
                   Buscar
                 </button>
@@ -88,6 +103,20 @@ export default {
         month: null,
         day: null,
       }),
+      months: [
+        { value: 1, text: "Enero" },
+        { value: 2, text: "Febrero" },
+        { value: 3, text: "Marzo" },
+        { value: 4, text: "Abril" },
+        { value: 5, text: "Mayo" },
+        { value: 6, text: "Junio" },
+        { value: 7, text: "Julio" },
+        { value: 8, text: "Agosto" },
+        { value: 9, text: "Setiembre" },
+        { value: 10, text: "Octubre" },
+        { value: 11, text: "Noviembre" },
+        { value: 12, text: "Diciembre" },
+      ],
       fullscreenLoading: false,
       chartData: {
         type: "line",
@@ -106,7 +135,7 @@ export default {
             {
               // one line graph
               label: "Enviados",
-              data: [0, 0, 1, 2, 67, 62, 27, 14],
+              data: [0, 0, 0, 0, 0, 0, 0, 0],
               backgroundColor: [
                 "rgba(54,73,93,.5)", // Blue
               ],
@@ -116,7 +145,7 @@ export default {
             {
               // another line graph
               label: "No enviados",
-              data: [4.8, 12.1, 12.7, 6.7, 139.8, 116.4, 50.7, 49.2],
+              data: [0, 0, 0, 0, 0, 0, 0, 0],
               backgroundColor: [
                 "rgba(71, 183,132,.5)", // Green
               ],
@@ -128,6 +157,10 @@ export default {
         options: {
           responsive: true,
           lineTension: 1,
+          interaction: {
+            // Overrides the global setting
+            mode: "index",
+          },
           scales: {
             y: {
               suggestedMin: 50,
@@ -136,18 +169,62 @@ export default {
           },
         },
       },
+      myChart: null,
     };
+  },
+  computed: {
+    days() {
+      let days = [];
+      //let year = this.filter.year ? this.filter.year.slice(10,14) : '';
+      let year = this.filter.year;
+      if (year) {
+        year = String(year).slice(10, 15);
+      }
+      let maxDay = new Date(year, this.filter.month, 0).getDate();
+      for (let index = 1; index <= maxDay; index++) {
+        days.push(index);
+      }
+      return days;
+    },
   },
   watch: {
     "filter.type": {
       handler: function (val, oldVal) {
-        this.filter.year = null;
+        if (val == "year") {
+          let months = this.months.map((item) => item.text);
+          this.chartData.data.labels = months;
+          this.crearGrafico("statisticsId", this.chartData);
+        }
+        if (val == "month") {
+          this.chartData.data.labels = this.days;
+          this.crearGrafico("statisticsId", this.chartData);
+        }
+        if (val == "day") {
+          let hous = [];
+          for (let index = 0; index < 24; index++) {
+            hous.push(`${index}:00`);
+          }
+          this.chartData.data.labels = hous;
+          this.crearGrafico("statisticsId", this.chartData);
+        }
+      },
+    },
+    "filter.year": {
+      handler: function (val, oldVal) {
         this.filter.month = null;
+      },
+    },
+    "filter.month": {
+      handler: function (val, oldVal) {
         this.filter.day = null;
       },
     },
   },
   mounted() {
+    if (this.filter.type == "year") {
+      let months = this.months.map((item) => item.text);
+      this.chartData.data.labels = months;
+    }
     this.crearGrafico("statisticsId", this.chartData);
   },
   methods: {
@@ -160,14 +237,25 @@ export default {
     },
     crearGrafico(chartId, chartData) {
       const ctx = document.getElementById(chartId);
-      const myChart = new Chart(ctx, {
+      if (this.myChart) {
+        this.myChart.destroy();
+      }
+      this.myChart = new Chart(ctx, {
         type: chartData.type,
         data: chartData.data,
         options: chartData.options,
       });
     },
     getRecords() {
-      this.filter.post('estadisticas/records').then(({ data }) => {});
+      this.filter.post("estadisticas/records").then(({ data }) => {
+          if (data.records.length > 0) {
+              this.chartData.data.labels.forEach((element, key) =>{
+                  if (data.records['']) {
+
+                  }
+              })
+          }
+      });
     },
   },
 };
