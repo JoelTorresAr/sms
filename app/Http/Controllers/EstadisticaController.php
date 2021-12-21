@@ -15,6 +15,7 @@ class EstadisticaController extends Controller
     public function records(Request $request)
     {
         $sms = Sms::query();
+        $records = [];
         $type = $request->type;
         $year = substr($request->year, 0, 4);
         if ($type == 'year' || $type == 'month' || $type == 'day') {
@@ -35,7 +36,9 @@ class EstadisticaController extends Controller
                 $sms = $sms->selectRaw("HOUR(created_at) AS text, COUNT(created_at) AS value")->groupByRaw("created_at");
             }
         }
-        $records = $sms->get();
+        $records[] = $sms->get();
+        $records[] = $sms->where('status', 'ENTREGADO')->get();
+        $records[] = $sms->where('status', '!=', 'ENTREGADO')->get();
 
         return compact('records');
     }

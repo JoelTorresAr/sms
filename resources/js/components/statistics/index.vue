@@ -135,21 +135,21 @@ export default {
             {
               // one line graph
               label: "Enviados",
-              data: [0, 0, 0, 0, 0, 0, 0, 0],
+              data: [],
               backgroundColor: [
-                "rgba(54,73,93,.5)", // Blue
+                "rgba(71, 183,132,.5)", // Green
               ],
-              borderColor: ["#36495d"],
+              borderColor: ["#47b784"],
               borderWidth: 3,
             },
             {
               // another line graph
               label: "No enviados",
-              data: [0, 0, 0, 0, 0, 0, 0, 0],
+              data: [],
               backgroundColor: [
-                "rgba(71, 183,132,.5)", // Green
+                "rgba(54,73,93,.5)", // Blue
               ],
-              borderColor: ["#47b784"],
+              borderColor: ["#36495d"],
               borderWidth: 3,
             },
           ],
@@ -163,8 +163,8 @@ export default {
           },
           scales: {
             y: {
-              suggestedMin: 50,
-              suggestedMax: 100,
+              suggestedMin: 0,
+              //suggestedMax: 5,
             },
           },
         },
@@ -190,14 +190,15 @@ export default {
   watch: {
     "filter.type": {
       handler: function (val, oldVal) {
+        this.chartData.data.datasets[0].data = [];
         if (val == "year") {
           let months = this.months.map((item) => item.text);
           this.chartData.data.labels = months;
-          this.crearGrafico("statisticsId", this.chartData);
+          this.crearGrafico();
         }
         if (val == "month") {
           this.chartData.data.labels = this.days;
-          this.crearGrafico("statisticsId", this.chartData);
+          this.crearGrafico();
         }
         if (val == "day") {
           let hous = [];
@@ -205,7 +206,7 @@ export default {
             hous.push(`${index}:00`);
           }
           this.chartData.data.labels = hous;
-          this.crearGrafico("statisticsId", this.chartData);
+          this.crearGrafico();
         }
       },
     },
@@ -235,7 +236,7 @@ export default {
       this.typeMessage = "MENSAJE LIBRE";
       this.$refs.multipleTable.clearSelection();
     },
-    crearGrafico(chartId, chartData) {
+    crearGrafico(chartId = "statisticsId", chartData = this.chartData) {
       const ctx = document.getElementById(chartId);
       if (this.myChart) {
         this.myChart.destroy();
@@ -248,13 +249,21 @@ export default {
     },
     getRecords() {
       this.filter.post("estadisticas/records").then(({ data }) => {
-          if (data.records.length > 0) {
-              this.chartData.data.labels.forEach((element, key) =>{
-                  if (data.records['']) {
-
-                  }
-              })
-          }
+        if (data.records.length > 0) {
+          this.chartData.data.labels.forEach((item, key) => {
+            let value = data.records[0].find((element) => {
+              return (
+                element.text == (this.filter.type == "month" ? item : key + 1)
+              );
+            });
+            if (value) {
+              this.chartData.data.datasets[0].data[key] = value.value;
+            } else {
+              this.chartData.data.datasets[0].data[key] = 0;
+            }
+          });
+          this.crearGrafico();
+        }
       });
     },
   },
