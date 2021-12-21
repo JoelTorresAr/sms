@@ -1,1 +1,520 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[25],{371:function(t,e,r){"use strict";r.r(e);var a=r(2),i=r.n(a);function s(t,e,r,a,i,s,o){try{var n=t[s](o),c=n.value}catch(t){return void r(t)}n.done?e(c):Promise.resolve(c).then(a,i)}var o={data:function(){return{record:{name:""},fullscreenLoading:!1,error:0}},computed:{},methods:{limpiarCriterios:function(){this.record.name=""},setRegistrarTipo:function(){var t,e=this;return(t=i.a.mark((function t(){var r,a;return i.a.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:if(!e.validarRegistrarTipo()){t.next=2;break}return t.abrupt("return");case 2:return e.fullscreenLoading=!0,t.next=6,e.callApi("post","/configuracion/tipo/store",e.record);case 6:if(200==(r=t.sent).status)e.notification("success","Registro creado con éxito",0),e.$router.push("/tipo");else{if(422==r.status)for(a in r.data.errors)e.notification("error",r.data.errors[a][0]);401==r.status&&(e.$router.push({name:"login"}),location.reload(),localStorage.clear()),419==r.status&&(e.notification("error","Fue necesario recargar la página",0),location.reload())}e.fullscreenLoading=!1;case 9:case"end":return t.stop()}}),t)})),function(){var e=this,r=arguments;return new Promise((function(a,i){var o=t.apply(e,r);function n(t){s(o,a,i,n,c,"next",t)}function c(t){s(o,a,i,n,c,"throw",t)}n(void 0)}))})()},validarRegistrarTipo:function(){return this.error=0,this.record.name||(this.notification("error","El Tipo Persona es un campo obligatorio",0),this.error=1),this.error}}},n=r(14),c=Object(n.a)(o,(function(){var t=this,e=t.$createElement,r=t._self._c||e;return r("div",{staticClass:"pcoded-content"},[r("div",{staticClass:"page-header"},[r("div",{staticClass:"page-block"},[r("div",{staticClass:"row align-items-center"},[r("div",{staticClass:"col-md-12"},[t._m(0),t._v(" "),r("ul",{staticClass:"breadcrumb"},[r("li",{staticClass:"breadcrumb-item"},[r("router-link",{attrs:{to:{name:"tipo.index"}}},[r("i",{staticClass:"fas fa-tasks"})])],1),t._v(" "),r("li",{staticClass:"breadcrumb-item"},[r("router-link",{attrs:{to:{name:"tipo.crear"}}},[t._v("\n                                Crear Tipo\n                            ")])],1)])])])])]),t._v(" "),r("div",{staticClass:"row"},[r("div",{staticClass:"col-sm-12"},[r("div",{staticClass:"card"},[r("div",{staticClass:"card-header"},[r("div",{staticClass:"col-sm-12"},[r("div",{staticClass:"btn-actions"},[r("div",{staticClass:"btn-group card-option"},[r("el-tooltip",{staticClass:"item",attrs:{effect:"dark",content:"Regresar",placement:"top"}},[r("button",{staticClass:"btn btn-icon btn-outline-primary",on:{click:function(e){return e.preventDefault(),t.goBack(e)}}},[r("i",{staticClass:"fas fa-arrow-left"})])])],1)])])]),t._v(" "),r("div",{staticClass:"card-body"},[r("form",{on:{submit:function(t){t.preventDefault()}}},[r("div",{staticClass:"row"},[r("div",{staticClass:"col-sm-12"},[r("div",{staticClass:"form-group"},[r("label",{attrs:{for:"Nombre"}},[t._v("Nombre (*)")]),t._v(" "),r("input",{directives:[{name:"model",rawName:"v-model",value:t.record.name,expression:"record.name"}],staticClass:"form-control",attrs:{type:"text",id:"Nombre",placeholder:"Nombre"},domProps:{value:t.record.name},on:{keyup:function(e){return!e.type.indexOf("key")&&t._k(e.keyCode,"enter",13,e.key,"Enter")?null:t.setRegistrarTipo(e)},input:function(e){e.target.composing||t.$set(t.record,"name",e.target.value)}}})])])]),t._v(" "),r("div",{staticClass:"row"},[r("div",{staticClass:"col-sm-12"},[r("button",{directives:[{name:"loading",rawName:"v-loading.fullscreen.lock",value:t.fullscreenLoading,expression:"fullscreenLoading",modifiers:{fullscreen:!0,lock:!0}}],staticClass:"btn btn-outline-primary has-ripple",attrs:{type:"button"},on:{click:function(e){return e.preventDefault(),t.setRegistrarTipo(e)}}},[t._v("Guardar")]),t._v(" "),r("button",{staticClass:"btn btn-outline-info has-ripple ",attrs:{type:"button"},on:{click:function(e){return e.preventDefault(),t.limpiarCriterios(e)}}},[t._v("Limpiar")])])])])])])])])])}),[function(){var t=this.$createElement,e=this._self._c||t;return e("div",{staticClass:"page-header-title"},[e("h5",{staticClass:"m-b-10"},[this._v("Gestión Tipos")])])}],!1,null,null,null);e.default=c.exports}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[25],{
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/tipo/edit.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/tipo/edit.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      record: {
+        id: this.$attrs.id,
+        name: ''
+      },
+      fullscreenLoading: false,
+      error: 0
+    };
+  },
+  mounted: function mounted() {
+    this.getTipoById();
+  },
+  methods: {
+    getTipoById: function getTipoById() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var url, res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.fullscreenLoading = true;
+                url = '/configuracion/tipo/show/' + _this.record.id;
+                _context.next = 4;
+                return _this.callApi('get', url);
+
+              case 4:
+                res = _context.sent;
+
+                if (res.status == 200) {
+                  _this.record.name = res.data.name;
+                  _this.fullscreenLoading = false;
+                } else {
+                  if (res.status == 401) {
+                    _this.$router.push({
+                      name: 'login'
+                    });
+
+                    location.reload();
+                    localStorage.clear();
+                  }
+
+                  if (res.status == 419) {
+                    _this.notification('error', 'Fue necesario recargar la página', 0);
+
+                    location.reload();
+                  }
+                }
+
+                _this.fullscreenLoading = false;
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    limpiarCriterios: function limpiarCriterios() {
+      this.record.name = '';
+    },
+    setEditarTipo: function setEditarTipo() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var url, res, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (!_this2.validarEditarTipo()) {
+                  _context2.next = 2;
+                  break;
+                }
+
+                return _context2.abrupt("return");
+
+              case 2:
+                _this2.fullscreenLoading = true;
+                url = '/configuracion/tipo/update/' + _this2.record.id;
+                _context2.next = 6;
+                return _this2.callApi('put', url, _this2.record);
+
+              case 6:
+                res = _context2.sent;
+
+                if (res.status == 200) {
+                  _this2.notification('success', 'Registro actualizado con éxito', 0);
+
+                  _this2.$router.push('/tipo');
+                } else {
+                  if (res.status == 422) {
+                    for (i in res.data.errors) {
+                      _this2.notification('error', res.data.errors[i][0]);
+                    }
+                  }
+
+                  if (res.status == 401) {
+                    _this2.$router.push({
+                      name: 'login'
+                    });
+
+                    location.reload();
+                    localStorage.clear();
+                  }
+
+                  if (res.status == 419) {
+                    _this2.notification('error', 'Fue necesario recargar la página', 0);
+
+                    location.reload();
+                  }
+                }
+
+                _this2.fullscreenLoading = false;
+
+              case 9:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    validarEditarTipo: function validarEditarTipo() {
+      this.error = 0;
+
+      if (!this.record.name) {
+        this.notification('error', 'El Nombre es un campo obligatorio', 0);
+        this.error = 1;
+      }
+
+      return this.error;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/tipo/edit.vue?vue&type=template&id=3d69886c&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/tipo/edit.vue?vue&type=template&id=3d69886c& ***!
+  \************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "pcoded-content" }, [
+    _c("div", { staticClass: "page-header" }, [
+      _c("div", { staticClass: "page-block" }, [
+        _c("div", { staticClass: "row align-items-center" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("ul", { staticClass: "breadcrumb" }, [
+              _c(
+                "li",
+                { staticClass: "breadcrumb-item" },
+                [
+                  _c("router-link", { attrs: { to: { name: "tipo.index" } } }, [
+                    _c("i", { staticClass: "fas fa-tasks" })
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                { staticClass: "breadcrumb-item" },
+                [
+                  _c("router-link", { attrs: { to: { name: "tipo.index" } } }, [
+                    _vm._v(
+                      "\n                                Editar Tipo\n                            "
+                    )
+                  ])
+                ],
+                1
+              )
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("div", { staticClass: "col-sm-12" }, [
+              _c("div", { staticClass: "btn-actions" }, [
+                _c(
+                  "div",
+                  { staticClass: "btn-group card-option" },
+                  [
+                    _c(
+                      "el-tooltip",
+                      {
+                        staticClass: "item",
+                        attrs: {
+                          effect: "dark",
+                          content: "Regresar",
+                          placement: "top"
+                        }
+                      },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-icon btn-outline-primary",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.goBack($event)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-arrow-left" })]
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-sm-12" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "Nombre" } }, [
+                        _vm._v("Nombre (*)")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.record.name,
+                            expression: "record.name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "Nombre",
+                          placeholder: "Nombre"
+                        },
+                        domProps: { value: _vm.record.name },
+                        on: {
+                          keyup: function($event) {
+                            if (
+                              !$event.type.indexOf("key") &&
+                              _vm._k(
+                                $event.keyCode,
+                                "enter",
+                                13,
+                                $event.key,
+                                "Enter"
+                              )
+                            ) {
+                              return null
+                            }
+                            return _vm.setEditarTipo($event)
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.record, "name", $event.target.value)
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-sm-12" }, [
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "loading",
+                            rawName: "v-loading.fullscreen.lock",
+                            value: _vm.fullscreenLoading,
+                            expression: "fullscreenLoading",
+                            modifiers: { fullscreen: true, lock: true }
+                          }
+                        ],
+                        staticClass: "btn btn-outline-primary has-ripple",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.setEditarTipo($event)
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-info has-ripple ",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.limpiarCriterios($event)
+                          }
+                        }
+                      },
+                      [_vm._v("Limpiar")]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "page-header-title" }, [
+      _c("h5", { staticClass: "m-b-10" }, [_vm._v("Gestión Tipos")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/tipo/edit.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/components/tipo/edit.vue ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _edit_vue_vue_type_template_id_3d69886c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit.vue?vue&type=template&id=3d69886c& */ "./resources/js/components/tipo/edit.vue?vue&type=template&id=3d69886c&");
+/* harmony import */ var _edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit.vue?vue&type=script&lang=js& */ "./resources/js/components/tipo/edit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _edit_vue_vue_type_template_id_3d69886c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _edit_vue_vue_type_template_id_3d69886c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/tipo/edit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/tipo/edit.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/tipo/edit.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./edit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/tipo/edit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/tipo/edit.vue?vue&type=template&id=3d69886c&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/tipo/edit.vue?vue&type=template&id=3d69886c& ***!
+  \******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_vue_vue_type_template_id_3d69886c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./edit.vue?vue&type=template&id=3d69886c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/tipo/edit.vue?vue&type=template&id=3d69886c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_vue_vue_type_template_id_3d69886c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_edit_vue_vue_type_template_id_3d69886c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ })
+
+}]);

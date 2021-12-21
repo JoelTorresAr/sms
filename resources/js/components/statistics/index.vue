@@ -119,7 +119,7 @@ export default {
       ],
       fullscreenLoading: false,
       chartData: {
-        type: "line",
+        type: "bar",
         data: {
           labels: [
             "Mercury",
@@ -153,18 +153,30 @@ export default {
               borderWidth: 3,
             },
           ],
+          barThickness: 25,
+          datalabels: {
+            color: "#FFCE56",
+          },
         },
         options: {
           responsive: true,
-          lineTension: 1,
-          interaction: {
-            // Overrides the global setting
-            mode: "index",
+          plugins: {
+            datalabels: {
+              anchor: "end", // remove this line to get label in middle of the bar
+              align: "end",
+              formatter: (val) => `${val}%`,
+              labels: {
+                value: {
+                  color: "blue",
+                },
+              },
+            },
           },
+          lineTension: 1,
           scales: {
             y: {
               suggestedMin: 0,
-              //suggestedMax: 5,
+              suggestedMax: 3,
             },
           },
         },
@@ -190,15 +202,12 @@ export default {
   watch: {
     "filter.type": {
       handler: function (val, oldVal) {
-        this.chartData.data.datasets[0].data = [];
         if (val == "year") {
           let months = this.months.map((item) => item.text);
           this.chartData.data.labels = months;
-          this.crearGrafico();
         }
         if (val == "month") {
           this.chartData.data.labels = this.days;
-          this.crearGrafico();
         }
         if (val == "day") {
           let hous = [];
@@ -206,7 +215,6 @@ export default {
             hous.push(`${index}:00`);
           }
           this.chartData.data.labels = hous;
-          this.crearGrafico();
         }
       },
     },
@@ -220,6 +228,11 @@ export default {
         this.filter.day = null;
       },
     },
+    "chartData.data.labels": {
+      handler: function (val, oldVal) {
+        this.startedGrafico();
+      },
+    },
   },
   mounted() {
     if (this.filter.type == "year") {
@@ -229,13 +242,6 @@ export default {
     this.crearGrafico("statisticsId", this.chartData);
   },
   methods: {
-    limpiarCriterios() {
-      this.record.to = "";
-      this.record.body = "";
-      this.record.bodyDefault = "";
-      this.typeMessage = "MENSAJE LIBRE";
-      this.$refs.multipleTable.clearSelection();
-    },
     crearGrafico(chartId = "statisticsId", chartData = this.chartData) {
       const ctx = document.getElementById(chartId);
       if (this.myChart) {
@@ -246,6 +252,16 @@ export default {
         data: chartData.data,
         options: chartData.options,
       });
+    },
+    startedGrafico() {
+      let len = this.chartData.data.labels.length;
+      this.chartData.data.datasets[0].data = [];
+      this.chartData.data.datasets[1].data = [];
+      for (let index = 0; index < len; index++) {
+        this.chartData.data.datasets[0].data.push(0);
+        this.chartData.data.datasets[1].data.push(0);
+      }
+      this.crearGrafico();
     },
     getRecords() {
       this.filter.post("estadisticas/records").then(({ data }) => {

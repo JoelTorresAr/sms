@@ -1,1 +1,596 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[28],{374:function(t,e,a){"use strict";a.r(e);var r=a(2),i=a.n(r);function s(t,e,a,r,i,s,o){try{var n=t[s](o),c=n.value}catch(t){return void a(t)}n.done?e(c):Promise.resolve(c).then(r,i)}var o={data:function(){return{record:{name:""},fullscreenLoading:!1,error:0}},computed:{},methods:{limpiarCriterios:function(){this.record.name=""},setRegistrarTipomedia:function(){var t,e=this;return(t=i.a.mark((function t(){var a,r;return i.a.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:if(!e.validarRegistrarTipomedia()){t.next=2;break}return t.abrupt("return");case 2:return e.fullscreenLoading=!0,t.next=6,e.callApi("post","/configuracion/tipomedia/store",e.record);case 6:if(200==(a=t.sent).status)e.notification("success","Registro creado con éxito",0),e.$router.push("/tipomedia");else{if(422==a.status)for(r in a.data.errors)e.notification("error",a.data.errors[r][0]);401==a.status&&(e.$router.push({name:"login"}),location.reload(),localStorage.clear()),419==a.status&&(e.notification("error","Fue necesario recargar la página",0),location.reload())}e.fullscreenLoading=!1;case 9:case"end":return t.stop()}}),t)})),function(){var e=this,a=arguments;return new Promise((function(r,i){var o=t.apply(e,a);function n(t){s(o,r,i,n,c,"next",t)}function c(t){s(o,r,i,n,c,"throw",t)}n(void 0)}))})()},validarRegistrarTipomedia:function(){return this.error=0,this.record.name||(this.notification("error","El Tipo Persona es un campo obligatorio",0),this.error=1),this.error}}},n=a(14),c=Object(n.a)(o,(function(){var t=this,e=t.$createElement,a=t._self._c||e;return a("div",{staticClass:"pcoded-content"},[a("div",{staticClass:"page-header"},[a("div",{staticClass:"page-block"},[a("div",{staticClass:"row align-items-center"},[a("div",{staticClass:"col-md-12"},[t._m(0),t._v(" "),a("ul",{staticClass:"breadcrumb"},[a("li",{staticClass:"breadcrumb-item"},[a("router-link",{attrs:{to:{name:"tipomedia.index"}}},[a("i",{staticClass:"fas fa-tasks"})])],1),t._v(" "),a("li",{staticClass:"breadcrumb-item"},[a("router-link",{attrs:{to:{name:"tipomedia.crear"}}},[t._v("\n                                Crear Tipomedia\n                            ")])],1)])])])])]),t._v(" "),a("div",{staticClass:"row"},[a("div",{staticClass:"col-sm-12"},[a("div",{staticClass:"card"},[a("div",{staticClass:"card-header"},[a("div",{staticClass:"col-sm-12"},[a("div",{staticClass:"btn-actions"},[a("div",{staticClass:"btn-group card-option"},[a("el-tooltip",{staticClass:"item",attrs:{effect:"dark",content:"Regresar",placement:"top"}},[a("button",{staticClass:"btn btn-icon btn-outline-primary",on:{click:function(e){return e.preventDefault(),t.goBack(e)}}},[a("i",{staticClass:"fas fa-arrow-left"})])])],1)])])]),t._v(" "),a("div",{staticClass:"card-body"},[a("form",{on:{submit:function(t){t.preventDefault()}}},[a("div",{staticClass:"row"},[a("div",{staticClass:"col-sm-12"},[a("div",{staticClass:"form-group"},[a("label",{attrs:{for:"Nombre"}},[t._v("Nombre (*)")]),t._v(" "),a("input",{directives:[{name:"model",rawName:"v-model",value:t.record.name,expression:"record.name"}],staticClass:"form-control",attrs:{type:"text",id:"Nombre",placeholder:"Nombre"},domProps:{value:t.record.name},on:{keyup:function(e){return!e.type.indexOf("key")&&t._k(e.keyCode,"enter",13,e.key,"Enter")?null:t.setRegistrarTipomedia(e)},input:function(e){e.target.composing||t.$set(t.record,"name",e.target.value)}}})])])]),t._v(" "),a("div",{staticClass:"row"},[a("div",{staticClass:"col-sm-12"},[a("button",{directives:[{name:"loading",rawName:"v-loading.fullscreen.lock",value:t.fullscreenLoading,expression:"fullscreenLoading",modifiers:{fullscreen:!0,lock:!0}}],staticClass:"btn btn-outline-primary has-ripple",attrs:{type:"button"},on:{click:function(e){return e.preventDefault(),t.setRegistrarTipomedia(e)}}},[t._v("Guardar")]),t._v(" "),a("button",{staticClass:"btn btn-outline-info has-ripple ",attrs:{type:"button"},on:{click:function(e){return e.preventDefault(),t.limpiarCriterios(e)}}},[t._v("Limpiar")])])])])])])])])])}),[function(){var t=this.$createElement,e=this._self._c||t;return e("div",{staticClass:"page-header-title"},[e("h5",{staticClass:"m-b-10"},[this._v("Gestión Tipomedia")])])}],!1,null,null,null);e.default=c.exports}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[28],{
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/tipomedia/index.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/tipomedia/index.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      filter: '',
+      listFilter: [],
+      listTipomedia: [],
+      fullscreenLoading: false,
+      currentPage1: 1,
+      page: 0
+    };
+  },
+  mounted: function mounted() {
+    this.getListarTipomedia();
+  },
+  methods: {
+    handleSizeChange: function handleSizeChange(val) {
+      console.log("".concat(val, " items per page"));
+    },
+    handleCurrentChange: function handleCurrentChange() {
+      var val = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      this.page = val;
+
+      if (val == 0) {
+        val = 0;
+      } else {
+        val = val - 1;
+      }
+
+      var inicio = val * 10,
+          fin = inicio + 10;
+      this.listFilter = this.listTipomedia.slice(inicio, fin);
+    },
+    getListarTipomedia: function getListarTipomedia() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var url, res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.fullscreenLoading = true;
+                url = '/configuracion/tipomedia/index';
+                _context.next = 4;
+                return _this.callGetApi('get', url, {
+                  'filter': _this.filter
+                });
+
+              case 4:
+                res = _context.sent;
+
+                if (res.status == 200) {
+                  _this.listTipomedia = res.data;
+
+                  _this.handleCurrentChange();
+                } else {
+                  if (res.status == 401) {
+                    _this.$router.push({
+                      name: 'login'
+                    });
+
+                    location.reload();
+                    localStorage.clear();
+                  }
+
+                  if (res.status == 419) {
+                    _this.notification('error', 'Fue necesario recargar la página', 0);
+
+                    location.reload();
+                  }
+                }
+
+                _this.fullscreenLoading = false;
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/tipomedia/index.vue?vue&type=template&id=1454ba38&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/tipomedia/index.vue?vue&type=template&id=1454ba38& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "pcoded-content" }, [
+    _c("div", { staticClass: "page-header" }, [
+      _c("div", { staticClass: "page-block" }, [
+        _c("div", { staticClass: "row align-items-center" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("ul", { staticClass: "breadcrumb" }, [
+              _c(
+                "li",
+                { staticClass: "breadcrumb-item" },
+                [
+                  _c(
+                    "router-link",
+                    { attrs: { to: { name: "tipomedia.index" } } },
+                    [_c("i", { staticClass: "fas fa-tasks" })]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                { staticClass: "breadcrumb-item" },
+                [
+                  _c(
+                    "router-link",
+                    { attrs: { to: { name: "tipomedia.index" } } },
+                    [
+                      _vm._v(
+                        "\n                                Navegar entre Tipos media\n                            "
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-sm-6" }, [
+                _c(
+                  "form",
+                  {
+                    staticClass: "form-inline",
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "form-group mx-sm-3 mb-2 fill" }, [
+                      _c("label", { staticClass: "sr-only" }, [
+                        _vm._v("Buscar")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.filter,
+                            expression: "filter"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", placeholder: "Buscar" },
+                        domProps: { value: _vm.filter },
+                        on: {
+                          keyup: function($event) {
+                            if (
+                              !$event.type.indexOf("key") &&
+                              _vm._k(
+                                $event.keyCode,
+                                "enter",
+                                13,
+                                $event.key,
+                                "Enter"
+                              )
+                            ) {
+                              return null
+                            }
+                            $event.preventDefault()
+                            return _vm.getListarTipomedia($event)
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.filter = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "loading",
+                            rawName: "v-loading.fullscreen.lock",
+                            value: _vm.fullscreenLoading,
+                            expression: "fullscreenLoading",
+                            modifiers: { fullscreen: true, lock: true }
+                          }
+                        ],
+                        staticClass: "btn btn-primary mb-2",
+                        attrs: { type: "button" },
+                        on: {
+                          "&click": function($event) {
+                            return _vm.getListarTipomedia($event)
+                          }
+                        }
+                      },
+                      [_vm._v("Buscar")]
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-6" }, [
+                _c("div", { staticClass: "btn-actions" }, [
+                  _vm.listPermissions.includes("tipomedia.crear")
+                    ? _c(
+                        "div",
+                        { staticClass: "btn-group card-option" },
+                        [
+                          _c(
+                            "el-tooltip",
+                            {
+                              staticClass: "item",
+                              attrs: {
+                                effect: "dark",
+                                content: "Nuevo Tipomedia",
+                                placement: "top"
+                              }
+                            },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "btn  btn-icon btn-outline-primary",
+                                  attrs: { to: { name: "tipomedia.crear" } }
+                                },
+                                [_c("i", { staticClass: "feather icon-plus" })]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e()
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body table-border-style" }, [
+            _c(
+              "div",
+              { staticClass: "table-responsive" },
+              [
+                _vm.listFilter.length
+                  ? [
+                      _c("table", { staticClass: "table table-hover" }, [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.listFilter, function(item, index) {
+                            return _c("tr", { key: index }, [
+                              _c("td", {
+                                domProps: { textContent: _vm._s(item.name) }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                [
+                                  _vm.listPermissions.includes(
+                                    "tipomedia.editar"
+                                  )
+                                    ? _c(
+                                        "el-tooltip",
+                                        {
+                                          staticClass: "item",
+                                          attrs: {
+                                            effect: "dark",
+                                            content: "Editar Tipomedia",
+                                            placement: "top"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "router-link",
+                                            {
+                                              staticClass:
+                                                "btn  btn-icon btn-outline-primary",
+                                              attrs: {
+                                                to: {
+                                                  name: "tipomedia.editar",
+                                                  params: { id: item.id }
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "feather icon-edit"
+                                              })
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    : _vm._e()
+                                ],
+                                1
+                              )
+                            ])
+                          }),
+                          0
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("el-pagination", {
+                        attrs: {
+                          background: "",
+                          "current-page": _vm.currentPage1,
+                          "page-size": 10,
+                          layout: "total, prev, pager, next",
+                          total: _vm.listTipomedia.length
+                        },
+                        on: {
+                          "size-change": _vm.handleSizeChange,
+                          "current-change": _vm.handleCurrentChange,
+                          "update:currentPage": function($event) {
+                            _vm.currentPage1 = $event
+                          },
+                          "update:current-page": function($event) {
+                            _vm.currentPage1 = $event
+                          }
+                        }
+                      })
+                    ]
+                  : [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "alert alert-primary",
+                          attrs: { role: "alert" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                No se encontraron registros\n                            "
+                          )
+                        ]
+                      )
+                    ]
+              ],
+              2
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "page-header-title" }, [
+      _c("h5", { staticClass: "m-b-10" }, [_vm._v("Gestión Tipomedia")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Acciones")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/tipomedia/index.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/tipomedia/index.vue ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _index_vue_vue_type_template_id_1454ba38___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.vue?vue&type=template&id=1454ba38& */ "./resources/js/components/tipomedia/index.vue?vue&type=template&id=1454ba38&");
+/* harmony import */ var _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.vue?vue&type=script&lang=js& */ "./resources/js/components/tipomedia/index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _index_vue_vue_type_template_id_1454ba38___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _index_vue_vue_type_template_id_1454ba38___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/tipomedia/index.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/tipomedia/index.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/tipomedia/index.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/tipomedia/index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/tipomedia/index.vue?vue&type=template&id=1454ba38&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/tipomedia/index.vue?vue&type=template&id=1454ba38& ***!
+  \************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_1454ba38___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./index.vue?vue&type=template&id=1454ba38& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/tipomedia/index.vue?vue&type=template&id=1454ba38&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_1454ba38___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_1454ba38___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ })
+
+}]);
