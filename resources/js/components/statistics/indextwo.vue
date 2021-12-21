@@ -119,7 +119,7 @@ export default {
       ],
       fullscreenLoading: false,
       chartData: {
-        type: "line",
+        type: "bar",
         data: {
           labels: [],
           datasets: [
@@ -146,9 +146,6 @@ export default {
           ],
         },
         options: {
-          legend: {
-            display: false,
-          },
           responsive: true,
           lineTension: 1,
           scales: {
@@ -157,21 +154,14 @@ export default {
               suggestedMax: 3,
             },
           },
+          legend: {
+            display: false,
+          },
           plugins: {
             datalabels: {
               display: true,
-              align: "top",
+              align: "center",
               anchor: "center",
-              labels: {
-                title: {
-                  font: {
-                    weight: "bold",
-                  },
-                },
-                value: {
-                  color: "blue",
-                },
-              },
             },
           },
         },

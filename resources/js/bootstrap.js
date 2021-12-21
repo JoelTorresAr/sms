@@ -9,6 +9,9 @@ window._ = require('lodash');
 window.axios = require('axios');
 window.copy = require('copy-to-clipboard');
 window.Chart = require('chart.js/dist/chart');
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+// Register the plugin to all charts:
+window.Chart.register(ChartDataLabels);
 import './Chart.css';
 
 

@@ -21,19 +21,19 @@ class EstadisticaController extends Controller
         if ($type == 'year' || $type == 'month' || $type == 'day') {
             $sms = $sms->where(DB::raw('YEAR(created_at)'), $year);
             if ($type == 'year') {
-                $sms = $sms->selectRaw("MONTH(created_at) AS text, COUNT(created_at) AS value")->groupByRaw("created_at");
+                $sms = $sms->selectRaw("MONTH(created_at) AS text, COUNT(created_at) AS value")->groupByRaw("text");
             }
         }
         if ($type == 'month' || $type == 'day') {
             $sms = $sms->where(DB::raw('MONTH(created_at)'), $request->month);
             if ($type == 'month') {
-                $sms = $sms->selectRaw("DAY(created_at) AS text, COUNT(created_at) AS value")->groupByRaw("created_at");
+                $sms = $sms->selectRaw("DAY(created_at) AS text, COUNT(created_at) AS value")->groupByRaw("text");
             }
         }
         if ($type == 'day') {
             $sms = $sms->where(DB::raw('DAY(created_at)'), $request->day);
             if ($type == 'day') {
-                $sms = $sms->selectRaw("HOUR(created_at) AS text, COUNT(created_at) AS value")->groupByRaw("created_at");
+                $sms = $sms->selectRaw("HOUR(created_at) AS text, COUNT(created_at) AS value")->groupByRaw("text");
             }
         }
         $records[] = $sms->get();
